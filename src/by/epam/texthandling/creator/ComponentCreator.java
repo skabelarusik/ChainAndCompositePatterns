@@ -1,35 +1,28 @@
 package by.epam.texthandling.creator;
 
 import by.epam.texthandling.composite.Component;
-import by.epam.texthandling.composite.WordComposite;
+import by.epam.texthandling.composite.Symbol;
+import by.epam.texthandling.composite.TextComposite;
+import by.epam.texthandling.composite.TypeComponent;
 import by.epam.texthandling.exception.TextParcerException;
-import by.epam.texthandling.resources.RegularExpression;
+import by.epam.texthandling.resource.RegularExpression;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ComponentCreator {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     public static String recreateText(Component component) throws TextParcerException {
 
-        StringBuilder stringBuilder;
-
-        if(component == null){
+        if (component == null) {
             throw new TextParcerException("Wrong component for recreate text");
         }
 
-            stringBuilder = new StringBuilder();
+        String text = ((TextComposite)component).toString();
+        LOGGER.debug("Text was recreated");
 
-            for (Component text : ((WordComposite) component).getComponents()) {
-                for (Component paragr : ((WordComposite) text).getComponents()) {
-                    for (Component sentence : ((WordComposite) paragr).getComponents()) {
-                        for (Component word : ((WordComposite) sentence).getComponents()) {
-                            for (Component letter : ((WordComposite) word).getComponents()) {
-                                stringBuilder.append(letter.toString());
-                            }
-                            stringBuilder.append(RegularExpression.PUNKT_SPLIT_REG_EX);
-                        }
-                    }
-                    stringBuilder.append("\n");
-                }
-            }
-        return stringBuilder.toString();
+        return text;
+
     }
 }
