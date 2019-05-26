@@ -1,18 +1,17 @@
 package by.epam.texthandling.composite;
 
-public class Simbol implements Component {
+import java.util.Objects;
+
+public class Symbol implements Component {
 
     private char simbol;
+    private TypeComponent typeComponent = TypeComponent.SYMBOL;
 
-    public Simbol(){}
+    public Symbol(String space){}
 
-    public Simbol(char simbol){
+    public Symbol(char simbol){
         this.simbol = simbol;
     }
-
- //   @Override
- //   public void operation() {
- //   }
 
     @Override
     public boolean add(Component component) {
@@ -30,6 +29,23 @@ public class Simbol implements Component {
 
     public void setSimbol(char simbol) {
         this.simbol = simbol;
+    }
+
+    public TypeComponent getTypeComponent() {
+        return typeComponent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Symbol symbol = (Symbol) o;
+        return simbol == symbol.simbol;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(simbol);
     }
 
     @Override
