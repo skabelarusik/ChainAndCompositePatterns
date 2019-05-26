@@ -1,38 +1,23 @@
 package by.epam.texthandling.sorter;
 
 import by.epam.texthandling.composite.Component;
-import by.epam.texthandling.composite.WordComposite;
+import by.epam.texthandling.composite.TextComposite;
+import by.epam.texthandling.composite.TypeComponent;
 import by.epam.texthandling.exception.WrongDataComponentException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class SorterParagraphsSentenseCount implements SorterComposit {
+public class SorterParagraphsSentenseCount extends SorterComposit {
 
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    public Component sort(Component component) throws WrongDataComponentException {
-        if (component == null || !(component instanceof Component)) {
-            throw new WrongDataComponentException("Component for sort is null");
+    public void sort(Component component) throws WrongDataComponentException {
+        if(component == null){
+            throw new WrongDataComponentException("Component for sort sentences by words is null");
         }
 
-        Component minComponent;
-        Component currentComponent;
-        int min;
-        int current;
-        for (Component textAll : ((WordComposite) component).getComponents()) {
-
-            for (int i = 0; i < ((WordComposite) textAll).getComponents().size() - 1; i++) {
-                minComponent = ((WordComposite) textAll).getComponents().get(i);
-                min = ((WordComposite) minComponent).size();
-                for (int j = i + 1; j < ((WordComposite) textAll).getComponents().size(); j++) {
-                    currentComponent = ((WordComposite) textAll).getComponents().get(j);
-                    current = (((WordComposite) currentComponent).size());
-                    if (current < min) {
-                        ((WordComposite) textAll).getComponents().set(i, currentComponent);
-                        ((WordComposite) textAll).getComponents().set(j, minComponent);
-                        min = current;
-                    }
-                }
-            }
-        }
-        return component;
+        sortHelper(component, TypeComponent.PARAGRAPH);
+        LOGGER.debug(((TextComposite)component).getTypeComponent() + " was sorted");
     }
 }
 
