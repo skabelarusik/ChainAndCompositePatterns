@@ -1,0 +1,31 @@
+package resource;
+
+import by.epam.texthandling.composite.Component;
+import by.epam.texthandling.composite.Symbol;
+
+public class ParamForTest {
+
+    private ParamForTest(){}
+
+    public static final String PUTH = "test/resource/inputTest.txt";
+    public static final String WRONG_FILE_PUTH = "wrong.txt";
+    public static final String NULL = null;
+    public static final String WRONG_STRING_VAR = "Wrong";
+
+    public static final String HELLO_WORLD = "HELLO WORLD!!!";
+
+    public static final Component NULL_COMPONENT = null;
+
+    public static final Component SYMBOL_A = new Symbol('a');
+    public static final Component SYMBOL_B = new Symbol('b');
+    public static final Component SYMBOL_5 = new Symbol('5');
+    public static final String WORD_AB5 = "ab5";
+    public static final Component SYMBOL_H = new Symbol('h');
+    public static final Component SYMBOL_E = new Symbol('e');
+    public static final Component SYMBOL_Y = new Symbol('y');
+    public static final String WORD_HEY = "hey";
+    public static final String SENTENCE = "ab5 hey";
+    public static final String SPACE = " ";
+
+
+}
